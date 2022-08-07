@@ -14,7 +14,11 @@
 > - Hilt - It is arguably the most used Dependency Injection, or DI, framework for Android. Many Android projects use Dagger to simplify building and providing dependencies across the app. It gives you the ability to create specific scopes, modules, and components, where each forms a piece of a puzzle: The dependency graph.
 > - Clean Architecture - Applying Clean Architecture and Solid Principles to build a robust, maintainable, and testable application.
 
-#### App functionalty
+#### App functionality
 >
-> - Play and puse 
-> - play next and pervisoce
+> - View a list of songs on main screen
+> - Play and puse
+> - play next and previous by swiping left and right
+> - Skip a few minutes forward and backward
+> - Show notification you use it to do previous functions
+> - Open a new screen to show more details about the song.
