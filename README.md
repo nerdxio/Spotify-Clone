@@ -1,7 +1,7 @@
 # Spotify Clone app 
-# IT is  Media Player App  
+### IT is  Media Player App sing exoplayer libery 
 
-> #### Tools and Technology  
+#### Tools and Technology  
 > I used in this app modern android component and libery 
 > - Kotlin - As a programming language.
 > - Coroutines - For multithreading while handling requests to the server and local database.
