@@ -20,7 +20,7 @@ class FirebaseMusicSource @Inject constructor(
     private val musicDatabase: MusicDatabase
 ) {
 
-    private var songs = emptyArray<MediaMetadataCompat>()
+    var songs = emptyArray<MediaMetadataCompat>()
 
     suspend fun fetchMediaData()  = with(Dispatchers.IO) {
         state =STATE_INITIALIZING
@@ -60,7 +60,7 @@ class FirebaseMusicSource @Inject constructor(
             .setIconUri(song.description.iconUri)
             .build()
         MediaBrowserCompat.MediaItem(des, FLAG_PLAYABLE)
-    }
+    }.toMutableList()
 
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
 
