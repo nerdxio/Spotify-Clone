@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.spotifyclone.R
+import com.example.spotifyclone.adapter.SwipeSongAdapter
 import com.example.spotifyclone.exoplayer.MusicServiceConnection
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,9 @@ object AppModel {
         @ApplicationContext context: Context
     )=MusicServiceConnection(context)
 
+    @Singleton
+    @Provides
+    fun provideSwipeSongAdapter() = SwipeSongAdapter()
     @Provides
     @Singleton
     fun provideGlideInstance(@ApplicationContext context: Context) =
