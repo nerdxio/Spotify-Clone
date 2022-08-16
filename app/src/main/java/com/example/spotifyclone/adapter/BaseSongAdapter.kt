@@ -6,20 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
 import com.example.spotifyclone.R
 import com.example.spotifyclone.data.entities.Song
-import com.google.android.exoplayer2.audio.AudioCapabilitiesReceiver
 import kotlinx.android.synthetic.main.list_item.view.*
-import javax.inject.Inject
 
-class SingAdapter @Inject constructor(
-    private val glide: RequestManager
-) : RecyclerView.Adapter<SingAdapter.SongViewHolder>() {
+abstract class BaseSongAdapter(
+    private val layoutId:Int
+) : RecyclerView.Adapter<BaseSongAdapter.SongViewHolder>() {
 
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Song>() {
+       protected val diffCallback = object : DiffUtil.ItemCallback<Song>() {
         override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
             return oldItem.mediaId == newItem.mediaId
         }
@@ -29,7 +26,7 @@ class SingAdapter @Inject constructor(
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
+    protected abstract val differ: AsyncListDiffer<Song>
 
     var songs: List<Song>
         get() = differ.currentList
@@ -37,28 +34,13 @@ class SingAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         return SongViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        val song = songs[position]
-        holder.itemView.apply {
-            tvPrimary.text = song.title
-            tvSecondary.text = song.subtitle
-            glide.load(song.imageUrl).into(ivItemImage)
+    protected var onItemClickListener: ((Song) -> Unit)? = null
 
-            setOnClickListener {
-              onItemClickListener?.let { click ->
-                  click(song)
-              }
-            }
-        }
-    }
-
-    private var onItemClickListener: ((Song) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Song) -> Unit) {
+    fun setItemClickListener(listener: (Song) -> Unit) {
         onItemClickListener = listener
     }
 

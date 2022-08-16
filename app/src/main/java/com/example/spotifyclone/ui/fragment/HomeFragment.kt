@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spotifyclone.R
-import com.example.spotifyclone.adapter.SingAdapter
+import com.example.spotifyclone.adapter.SongAdapter
 import com.example.spotifyclone.other.Status
 import com.example.spotifyclone.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,14 +20,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var mainViewModel: MainViewModel
 
     @Inject
-    lateinit var songAdapter: SingAdapter
+    lateinit var songAdapter: SongAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         setUpRecyclerView()
         subscribeToObservers()
-        songAdapter.setOnItemClickListener {
+        //be careful here
+        songAdapter.setItemClickListener {
             mainViewModel.playOrToggleSong(it)
         }
     }
