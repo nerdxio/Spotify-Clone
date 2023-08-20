@@ -1,5 +1,5 @@
 # Spotify Clone app 
-### IT is  Media Player App sing exoplayer libery 
+### Media Player App clone for Spotify
 
 #### Tools and Technology  
 > I used in this app modern android component and libery 
